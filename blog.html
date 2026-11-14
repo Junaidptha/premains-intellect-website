@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="root-path" content="./">
+  <title>Insights & Tax Intelligence | PREMAINS INTELLECT LLP</title>
+  <meta name="description" content="Technical analysis, IRS Form 5472 guides, UAE Corporate Tax updates, and CPA practice management insights from the partners at PREMAINS INTELLECT LLP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/data/config.js" defer></script>
+  <script src="js/data/posts.js" defer></script>
+  <script src="js/components.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumbs__sep">/</span>
+          <span>Insights & Blog</span>
+        </nav>
+        <div class="eyebrow" style="color: var(--color-accent);">Advisory Intelligence</div>
+        <h1 class="page-hero__title">Tax, Accounting & Practice Insights</h1>
+        <p class="text-lead" style="color: #D3DFEE; max-width: 760px;">
+          Authoritative legal and technical commentary on cross-border tax compliance, statutory updates, and modern practice scaling strategies.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <!-- Search & Filter Controls -->
+        <div class="reveal" style="margin-bottom: var(--space-8); display: flex; flex-direction: column; gap: var(--space-4); align-items: center; justify-content: space-between;">
+          <!-- Search Bar -->
+          <div style="position: relative; width: 100%; max-width: 480px;">
+            <input type="text" id="blog-search-input" class="form-control" placeholder="Search insights (e.g. Form 5472, UAE Tax, CPA)..." style="padding-left: 44px;">
+            <svg class="icon" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--color-text-light); width: 18px; height: 18px;">
+              <use href="assets/icons/icons.svg#icon-search"></use>
+            </svg>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <!-- <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center;" id="category-filter-buttons">
+            <button type="button" class="btn btn--sm btn--primary filter-btn active" data-category="all">All Topics</button>
+            <button type="button" class="btn btn--sm btn--outline-navy filter-btn" data-category="USA Tax">USA Tax</button>
+            <button type="button" class="btn btn--sm btn--outline-navy filter-btn" data-category="UAE Corporate Tax">UAE Corporate Tax</button>
+            <button type="button" class="btn btn--sm btn--outline-navy filter-btn" data-category="Practice Management">Practice Management</button>
+          </div> -->
+        </div>
+
+        <!-- Dynamic Blog Cards Grid -->
+        <div class="grid grid--3" id="blog-posts-grid">
+          <!-- Populated by JavaScript below -->
+        </div>
+
+        <!-- No Results Fallback -->
+        <div id="no-posts-found" style="display: none; text-align: center; padding: var(--space-12);">
+          <h3>No articles match your search query</h3>
+          <p>Try searching for keywords like "tax", "CPA", "Free Zone", or select another category filter.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Developer credit ticker -->
+  <div class="dev-ticker" role="region" aria-label="Developed by Junaid Khan, Java Full Stack Developer and AI/ML Engineer">
+    <div class="dev-ticker__track">
+      <div class="dev-ticker__group"><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span></div>
+      <div class="dev-ticker__group" aria-hidden="true"><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span></div>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <!-- Inline Blog Filtering Logic (Defer-safe) -->
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const posts = window.BLOG_POSTS || [];
+      const grid = document.getElementById('blog-posts-grid');
+      const searchInput = document.getElementById('blog-search-input');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const noFoundEl = document.getElementById('no-posts-found');
+
+      let currentCategory = 'all';
+      let currentQuery = '';
+
+      function renderPosts() {
+        if (!grid) return;
+        const filtered = posts.filter(post => {
+          const matchCat = currentCategory === 'all' || post.category.toLowerCase() === currentCategory.toLowerCase();
+          const matchQuery = !currentQuery || 
+                             post.title.toLowerCase().includes(currentQuery) || 
+                             post.excerpt.toLowerCase().includes(currentQuery) ||
+                             post.tags.some(t => t.toLowerCase().includes(currentQuery));
+          return matchCat && matchQuery;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '';
+          if (noFoundEl) noFoundEl.style.display = 'block';
+          return;
+        }
+
+        if (noFoundEl) noFoundEl.style.display = 'none';
+
+        grid.innerHTML = filtered.map(post => `
+          <article class="blog-card reveal is-revealed">
+            <img src="${post.image}" alt="${post.title}" class="blog-card__img" loading="lazy">
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="badge badge--gold">${post.category}</span>
+                <span>•</span>
+                <span>${post.readTime}</span>
+              </div>
+              <h3 class="blog-card__title">
+                <a href="blog/${post.slug}">${post.title}</a>
+              </h3>
+              <p class="blog-card__excerpt">${post.excerpt}</p>
+              <div class="blog-card__author">
+                <img src="${post.author.avatar}" alt="${post.author.name}" class="blog-card__author-img">
+                <div>
+                  <div style="font-weight: 700; font-size: 0.88rem; color: var(--color-primary);">${post.author.name}</div>
+                  <div style="font-size: 0.76rem; color: var(--color-text-muted);">${post.date}</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      renderPosts();
+
+      // Search event
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = e.target.value.trim().toLowerCase();
+          renderPosts();
+        });
+      }
+
+      // Filter button events
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('btn--primary');
+            b.classList.add('btn--outline-navy');
+          });
+          btn.classList.remove('btn--outline-navy');
+          btn.classList.add('btn--primary');
+
+          currentCategory = btn.getAttribute('data-category');
+          renderPosts();
+        });
+      });
+    });
+  </script> -->
+</body>
+</html>
