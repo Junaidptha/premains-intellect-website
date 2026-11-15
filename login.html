@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="root-path" content="./">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Login / Register | PREMAINS INTELLECT LLP</title>
+  <meta name="description" content="Log in or create your PREMAINS INTELLECT LLP account to claim your free trial or book a consultation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/data/config.js" defer></script>
+  <script src="js/components.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/vendor/supabase.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/login.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="site-header"></div>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumbs__sep">/</span>
+          <span>Login / Register</span>
+        </nav>
+        <div class="eyebrow" style="color: var(--color-accent);">Client Account</div>
+        <h1 class="page-hero__title">Login or Create Your Account</h1>
+        <p class="text-lead page-hero__lead">
+          Register once to claim your free trial and to book consultations with our partners.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="form-card auth-card reveal">
+
+          <!-- Already signed in -->
+          <div id="auth-signed-in" hidden>
+            <h3 style="color: var(--color-primary); margin-bottom: var(--space-2);">You are signed in</h3>
+            <p style="margin-bottom: var(--space-5);">Signed in as <strong id="auth-signed-in-email"></strong>.</p>
+            <div class="auth-actions">
+              <a href="enquiry.html#consultation-form" class="btn btn--primary" id="auth-continue">Continue to Free Trial / Consultation</a>
+              <button type="button" class="btn btn--outline-navy" id="auth-logout">Log out</button>
+            </div>
+          </div>
+
+          <!-- Login / Register -->
+          <div id="auth-forms">
+            <div class="auth-tabs" role="tablist" aria-label="Login or register">
+              <button type="button" class="auth-tab is-active" id="tab-login" role="tab" aria-selected="true" aria-controls="login-form">Login</button>
+              <button type="button" class="auth-tab" id="tab-register" role="tab" aria-selected="false" aria-controls="register-form">Register</button>
+            </div>
+
+            <div class="alert-box alert-box--success" id="auth-success" role="status"></div>
+            <div class="alert-box alert-box--error" id="auth-error" role="alert"></div>
+            <div class="auth-resend" id="auth-resend" hidden>
+              <button type="button" class="auth-link" id="auth-resend-btn">Resend confirmation email</button>
+            </div>
+
+            <!-- LOGIN -->
+            <form id="login-form" class="auth-panel" role="tabpanel" aria-labelledby="tab-login" novalidate>
+              <div class="form-group">
+                <label for="login-email" class="form-label">Email Address <span class="required">*</span></label>
+                <input type="email" id="login-email" class="form-control" autocomplete="email" placeholder="rohit@sharmaassociates.in" required>
+                <div class="form-error">Please enter a valid email address.</div>
+              </div>
+              <div class="form-group">
+                <label for="login-password" class="form-label">Password <span class="required">*</span></label>
+                <input type="password" id="login-password" class="form-control" autocomplete="current-password" required>
+                <div class="form-error">Please enter your password.</div>
+              </div>
+              <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">
+                <span>Login</span>
+                <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+              </button>
+              <p class="auth-switch">New here? <button type="button" class="auth-link" data-switch="register">Create an account</button></p>
+            </form>
+
+            <!-- REGISTER -->
+            <form id="register-form" class="auth-panel" role="tabpanel" aria-labelledby="tab-register" novalidate hidden>
+              <div class="form-group">
+                <label for="reg-name" class="form-label">Full Name <span class="required">*</span></label>
+                <input type="text" id="reg-name" class="form-control" autocomplete="name" placeholder="Rohit Sharma" required>
+                <div class="form-error">Please enter your full name.</div>
+              </div>
+              <div class="grid grid--2" style="gap: var(--space-4);">
+                <div class="form-group">
+                  <label for="reg-email" class="form-label">Email Address <span class="required">*</span></label>
+                  <input type="email" id="reg-email" class="form-control" autocomplete="email" placeholder="rohit@sharmaassociates.in" required>
+                  <div class="form-error">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group">
+                  <label for="reg-phone" class="form-label">Phone / WhatsApp <span class="required">*</span></label>
+                  <input type="tel" id="reg-phone" class="form-control" autocomplete="tel" placeholder="+91 98765 43210" required>
+                  <div class="form-error">Please enter a valid phone number.</div>
+                </div>
+              </div>
+              <div class="grid grid--2" style="gap: var(--space-4);">
+                <div class="form-group">
+                  <label for="reg-password" class="form-label">Password <span class="required">*</span></label>
+                  <input type="password" id="reg-password" class="form-control" autocomplete="new-password" minlength="8" required>
+                  <div class="form-error">Use at least 8 characters.</div>
+                </div>
+                <div class="form-group">
+                  <label for="reg-password2" class="form-label">Confirm Password <span class="required">*</span></label>
+                  <input type="password" id="reg-password2" class="form-control" autocomplete="new-password" required>
+                  <div class="form-error">Passwords do not match.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="reg-consent">
+                  <span style="font-size: 0.84rem;">I agree to the <a href="privacy-policy.html" style="text-decoration: underline;">privacy policy</a> and consent to confidential advisory communication.</span>
+                </label>
+                <div class="form-error" id="reg-consent-error" style="margin-top: 6px;">Please accept the privacy policy to continue.</div>
+              </div>
+              <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">
+                <span>Create Account</span>
+                <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+              </button>
+              <p class="auth-switch">Already registered? <button type="button" class="auth-link" data-switch="login">Login</button></p>
+            </form>
+          </div>
+
+          <!-- Shown when the Supabase key/library is not available -->
+          <div class="alert-box alert-box--error" id="auth-config-error" role="alert">
+            Login is temporarily unavailable. Please call or WhatsApp us at +91 98181 22696.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+
+</html>

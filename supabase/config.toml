@@ -1,0 +1,9 @@
+# Supabase CLI configuration (only what this project needs).
+# Run `supabase link --project-ref milyscsniqhlisfhahzm` once before deploying.
+project_id = "milyscsniqhlisfhahzm"
+
+# notify-consultation authenticates callers itself (user session token for the
+# website, x-cron-secret for retries), so the gateway JWT check is off. This
+# also keeps it working with the new sb_publishable_/sb_secret_ API keys.
+[functions.notify-consultation]
+verify_jwt = false

@@ -39,6 +39,13 @@ const SITE_CONFIG = {
     accessKey: "demo-mode", // Replace with your Web3Forms Access Key (e.g., 'xxxx-xxxx-xxxx-xxxx') or Formspree ID
     actionUrl: "https://api.web3forms.com/submit"
   },
+  // Supabase: login + Free Trial / Consultation requests.
+  // The publishable key is PUBLIC by design (row level security protects the data).
+  // NEVER put a secret / service_role key in this file.
+  supabase: {
+    url: "https://milyscsniqhlisfhahzm.supabase.co",
+    publishableKey: "sb_publishable_-ZhqU2pWyBr6rGHUTdqcoA_SYYhMd2f"
+  },
   // Google Analytics 4 Measurement ID
   analytics: {
     gaId: "G-PREMAINS2026", // Set your GA4 ID here

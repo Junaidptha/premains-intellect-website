@@ -141,6 +141,10 @@
             <div class="nav-item">
               <a href="${root}contact.html" class="nav-link" data-nav="contact">Contact</a>
             </div>
+
+            <div class="nav-item">
+              <a href="${root}login.html" class="nav-link" data-nav="login" data-auth-link>Login</a>
+            </div>
           </nav>
 
           <!-- Header Action & Mobile Hamburger -->
@@ -207,6 +211,10 @@
 
             <li class="drawer-nav__item">
               <a href="${root}contact.html" class="drawer-nav__link">Contact Us</a>
+            </li>
+
+            <li class="drawer-nav__item">
+              <a href="${root}login.html" class="drawer-nav__link" data-auth-link>Login</a>
             </li>
           </ul>
         </div>
@@ -340,6 +348,21 @@
     </div>
   `;
   document.body.appendChild(floatingContainer);
+
+  // If a Supabase session is stored in this browser, the Login link becomes "My Account".
+  // (Only a cheap storage check here; the real session check happens on the login/enquiry pages.)
+  (function markSignedIn() {
+    try {
+      const url = cfg.supabase && cfg.supabase.url;
+      if (!url) return;
+      const ref = new URL(url).hostname.split('.')[0];
+      if (!window.localStorage.getItem('sb-' + ref + '-auth-token')) return;
+      document.querySelectorAll('[data-auth-link]').forEach((a) => {
+        a.textContent = 'My Account';
+        a.setAttribute('href', root + 'enquiry.html#consultation-form');
+      });
+    } catch (e) { /* storage blocked: leave the Login link */ }
+  })();
 
   // Auto-highlight active navigation item
   function highlightActiveNav() {
