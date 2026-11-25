@@ -7,7 +7,7 @@ const SITE_CONFIG = {
     name: "PREMAINS INTELLECT LLP",
     shortName: "Premains Intellect",
     tagline: "Legal, Corporate, Tax & Technical Advisory — Trusted by Businesses, Startups & Individuals",
-    headquarters: "Raja Subodh Chandra Mallick Road, Laxmi Narayan Colony, Garia, Kolkata, West Bengal - 700047, India",
+    headquarters: "38B, Baishnab Ghata Road, G F, Debanjali Apartment, Naktala, Netaji Nagar, Kolkata, West Bengal - 700047, India",
     city: "Kolkata",
     country: "India",
     establishedYear: 2011,

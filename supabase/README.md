@@ -28,7 +28,10 @@ Then check Table Editor: `profiles` and `consultation_requests` exist and both s
 * **Redirect URLs:** add `https://premaints-intellect-llp.vercel.app/login.html` and
   `https://premaints-intellect-llp.vercel.app/enquiry.html` (plus the same for any custom domain).
   Confirmation e-mails send people back to `login.html`.
-* **Providers -> Email:** keep "Confirm email" ON; set the minimum password length to 8.
+* **Forgot password:** the reset e-mail also returns people to `login.html` (already in the Redirect URLs
+  above), where they choose a new password. No extra setup; customise the "Reset Password" template under
+  Authentication -> Email Templates if you like.
+* **Providers -> Email:** keep "Confirm email" ON; set the minimum password length to 8 (the site also asks for letters and numbers).
 * **Production e-mail sending:** Supabase's built-in mailer allows only a few e-mails per hour.
   Under Project Settings -> Authentication -> SMTP, connect a real SMTP provider (Resend SMTP works) so
   confirmation e-mails always arrive.

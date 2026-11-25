@@ -1,7 +1,7 @@
 /**
  * PREMAINS INTELLECT LLP - Home Hero Slider
  * Shows one slide (text + background photo) at a time, advancing every 5 seconds.
- * Pauses on hover/focus, supports the dots, and stays still for reduced-motion users.
+ * Keeps changing whether or not the mouse is over it; supports the dots, and stays still for reduced-motion users.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,11 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     progress.style.animation = '';
   }
 
-  function stop() {
-    clearTimeout(timer);
-    hero.classList.add('is-paused');
-  }
-
   function play() {
     if (reduceMotion) return;
     clearTimeout(timer);
@@ -63,11 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
       play();
     });
   });
-
-  hero.addEventListener('mouseenter', stop);
-  hero.addEventListener('mouseleave', play);
-  hero.addEventListener('focusin', stop);
-  hero.addEventListener('focusout', play);
 
   hero.classList.add('hero--js');
   show(0);

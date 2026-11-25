@@ -122,16 +122,29 @@
                   <svg class="icon"><use href="${sprite}#icon-alert-circle"></use></svg>
                   Frequently Asked Questions
                 </a>
-                <a href="${root}assets/brochure.pdf" target="_blank" rel="noopener" class="dropdown-link" role="menuitem" style="color: var(--color-accent-hover); font-weight: 600;">
-                  <svg class="icon"><use href="${sprite}#icon-download"></use></svg>
-                  Download E-Brochure (PDF)
-                </a>
               </div>
             </div>
 
             <!-- Services Link -->
             <div class="nav-item">
-              <a href="${root}enquiry.html" class="nav-link" data-nav="services">Services</a>
+              <a href="${root}enquiry.html#our-services" class="nav-link" data-nav="services" aria-haspopup="true">
+                Services
+                <svg class="icon"><use href="${sprite}#icon-chevron-down"></use></svg>
+              </a>
+              <div class="dropdown-menu dropdown-menu--services" role="menu">
+                <a href="${root}enquiry.html?service=Legal%20%26%20Corporate%20Compliance#service-legal" class="dropdown-link" role="menuitem">Legal &amp; Corporate Compliance</a>
+                <a href="${root}enquiry.html?service=Tax%20Consultancy%20%26%20Advisory#service-tax" class="dropdown-link" role="menuitem">Tax Consultancy &amp; Advisory</a>
+                <a href="${root}enquiry.html?service=Bookkeeping%20%26%20Financial%20Preparation#service-bookkeeping" class="dropdown-link" role="menuitem">Bookkeeping &amp; Financial Preparation</a>
+                <a href="${root}enquiry.html?service=Sales%20Tax%20/%20VAT%20/%20GST%20Filing#service-vat-gst" class="dropdown-link" role="menuitem">Sales Tax / VAT / GST Filing</a>
+                <a href="${root}enquiry.html?service=Business%20Management%20Services#service-management" class="dropdown-link" role="menuitem">Business Management Services</a>
+                <a href="${root}enquiry.html?service=Business%20Planning%20Consultancy#service-planning" class="dropdown-link" role="menuitem">Business Planning Consultancy</a>
+                <a href="${root}enquiry.html?service=Business%20Research#service-research" class="dropdown-link" role="menuitem">Business Research</a>
+                <a href="${root}enquiry.html?service=Company%20%26%20LLP%20Incorporation#service-incorporation" class="dropdown-link" role="menuitem">Company &amp; LLP Incorporation</a>
+                <a href="${root}enquiry.html?service=HR%20%26%20Labour%20Law%20Consultancy#service-hr" class="dropdown-link" role="menuitem">HR &amp; Labour Law Consultancy</a>
+                <a href="${root}enquiry.html?service=IPR%20/%20Trademark%20Services#service-ipr" class="dropdown-link" role="menuitem">IPR / Trademark Services</a>
+                <a href="${root}enquiry.html?service=Payroll%20Processing#service-payroll" class="dropdown-link" role="menuitem">Payroll Processing</a>
+                <a href="${root}enquiry.html?service=AP%20/%20AR%20Management#service-apar" class="dropdown-link" role="menuitem">AP / AR Management</a>
+              </div>
             </div>
 
             <div class="nav-item">
@@ -141,16 +154,18 @@
             <div class="nav-item">
               <a href="${root}contact.html" class="nav-link" data-nav="contact">Contact</a>
             </div>
-
-            <div class="nav-item">
-              <a href="${root}login.html" class="nav-link" data-nav="login" data-auth-link>Login</a>
-            </div>
           </nav>
 
           <!-- Header Action & Mobile Hamburger -->
           <div class="header__actions">
+            <!-- LOGIN DISABLED (un-comment to bring back)
+            <a href="${root}login.html" class="header-login" id="header-login-btn" data-auth-link>
+              <svg class="icon"><use href="${sprite}#icon-user"></use></svg>
+              <span data-auth-label>Login</span>
+            </a>
+            -->
             <a href="${root}enquiry.html" class="btn btn--primary btn--sm" id="header-cta-btn">
-              <span>Free Consultation</span>
+              <span>Consultation</span>
               <svg class="icon"><use href="${sprite}#icon-arrow-right"></use></svg>
             </a>
             <button type="button" class="hamburger" id="hamburger-btn" aria-label="Open Mobile Navigation Menu" aria-expanded="false">
@@ -196,13 +211,29 @@
                 <a href="${root}data-security.html" class="drawer-sub__link">Data Security & Compliance</a>
                 <a href="${root}industries.html" class="drawer-sub__link">Industries We Serve</a>
                 <a href="${root}faqs.html" class="drawer-sub__link">Frequently Asked Questions</a>
-                <a href="${root}assets/brochure.pdf" target="_blank" rel="noopener" class="drawer-sub__link" style="color: var(--color-accent); font-weight: 600;">Download E-Brochure (PDF)</a>
               </div>
             </li>
 
             <!-- Mobile Services Link -->
             <li class="drawer-nav__item">
-              <a href="${root}enquiry.html" class="drawer-nav__link">Services</a>
+              <button type="button" class="drawer-accordion__btn" aria-expanded="false">
+                <span>Services</span>
+                <svg class="icon"><use href="${sprite}#icon-chevron-down"></use></svg>
+              </button>
+              <div class="drawer-accordion__content">
+                <a href="${root}enquiry.html?service=Legal%20%26%20Corporate%20Compliance#service-legal" class="drawer-sub__link">Legal &amp; Corporate Compliance</a>
+                <a href="${root}enquiry.html?service=Tax%20Consultancy%20%26%20Advisory#service-tax" class="drawer-sub__link">Tax Consultancy &amp; Advisory</a>
+                <a href="${root}enquiry.html?service=Bookkeeping%20%26%20Financial%20Preparation#service-bookkeeping" class="drawer-sub__link">Bookkeeping &amp; Financial Preparation</a>
+                <a href="${root}enquiry.html?service=Sales%20Tax%20/%20VAT%20/%20GST%20Filing#service-vat-gst" class="drawer-sub__link">Sales Tax / VAT / GST Filing</a>
+                <a href="${root}enquiry.html?service=Business%20Management%20Services#service-management" class="drawer-sub__link">Business Management Services</a>
+                <a href="${root}enquiry.html?service=Business%20Planning%20Consultancy#service-planning" class="drawer-sub__link">Business Planning Consultancy</a>
+                <a href="${root}enquiry.html?service=Business%20Research#service-research" class="drawer-sub__link">Business Research</a>
+                <a href="${root}enquiry.html?service=Company%20%26%20LLP%20Incorporation#service-incorporation" class="drawer-sub__link">Company &amp; LLP Incorporation</a>
+                <a href="${root}enquiry.html?service=HR%20%26%20Labour%20Law%20Consultancy#service-hr" class="drawer-sub__link">HR &amp; Labour Law Consultancy</a>
+                <a href="${root}enquiry.html?service=IPR%20/%20Trademark%20Services#service-ipr" class="drawer-sub__link">IPR / Trademark Services</a>
+                <a href="${root}enquiry.html?service=Payroll%20Processing#service-payroll" class="drawer-sub__link">Payroll Processing</a>
+                <a href="${root}enquiry.html?service=AP%20/%20AR%20Management#service-apar" class="drawer-sub__link">AP / AR Management</a>
+              </div>
             </li>
 
             <li class="drawer-nav__item">
@@ -213,9 +244,11 @@
               <a href="${root}contact.html" class="drawer-nav__link">Contact Us</a>
             </li>
 
+            <!-- LOGIN DISABLED (un-comment to bring back)
             <li class="drawer-nav__item">
               <a href="${root}login.html" class="drawer-nav__link" data-auth-link>Login</a>
             </li>
+            -->
           </ul>
         </div>
 
@@ -248,7 +281,7 @@
                   </svg>
                 </div>
                 <div class="logo__text">
-                  <span class="logo__title" style="color: #FFF;">PREMAINS INTELLECT LLP</span>
+                  <span class="logo__title">PREMAINS INTELLECT LLP</span>
                   <span class="logo__subtitle">LLP • CORPORATE ADVISORY</span>
                 </div>
               </div>
@@ -295,7 +328,6 @@
                 <li><a href="${root}data-security.html" class="footer__link">SOC & ISO Protocols</a></li>
                 <li><a href="${root}faqs.html" class="footer__link">Knowledge FAQ</a></li>
                 <li><a href="${root}blog.html" class="footer__link">Insights & Tax Updates</a></li>
-                <li><a href="${root}enquiry.html" class="footer__link" style="color: var(--color-accent);">Free 14-Day Pilot Trial</a></li>
               </ul>
             </div>
           </div>
@@ -303,13 +335,13 @@
           <!-- Bottom Footer -->
           <div class="footer__bottom">
             <div>
-              &copy; <span id="current-year">${currentYear}</span> ${cfg.brand.name}. All Rights Reserved. ISO 27001 Aligned Security.
+              &copy; <span id="current-year">${currentYear}</span> ${cfg.brand.name}. All Rights Reserved.
             </div>
             <div class="footer__bottom-links">
+              <span class="footer__credit">Designed &amp; developed by Junaid Khan</span>
               <a href="${root}privacy-policy.html">Privacy Policy</a>
               <a href="${root}terms.html">Terms of Engagement</a>
               <a href="${root}data-security.html">Data Security Policy</a>
-              <a href="${root}sitemap.xml">XML Sitemap</a>
             </div>
           </div>
         </div>
@@ -358,8 +390,9 @@
       const ref = new URL(url).hostname.split('.')[0];
       if (!window.localStorage.getItem('sb-' + ref + '-auth-token')) return;
       document.querySelectorAll('[data-auth-link]').forEach((a) => {
-        a.textContent = 'My Account';
-        a.setAttribute('href', root + 'enquiry.html#consultation-form');
+        const label = a.querySelector('[data-auth-label]');
+        (label || a).textContent = 'My Account';
+        a.setAttribute('href', root + 'login.html');
       });
     } catch (e) { /* storage blocked: leave the Login link */ }
   })();

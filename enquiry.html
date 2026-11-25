@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="root-path" content="./">
-  <title>Free Consultation & 14-Day Pilot Trial | PREMAINS INTELLECT LLP</title>
+  <title>Consultation | PREMAINS INTELLECT LLP</title>
   <meta name="description"
-    content="Request a free 30-minute consultation or 14-day pilot trial with PREMAINS INTELLECT LLP. Transparent pricing for offshore accounting, bookkeeping, and tax preparation.">
+    content="Request a 30-minute consultation with PREMAINS INTELLECT LLP. Transparent pricing for offshore accounting, bookkeeping, and tax preparation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -21,8 +21,9 @@
   <script src="js/nav.js" defer></script>
   <script src="js/animations.js" defer></script>
   <script src="js/cookies.js" defer></script>
-  <script src="js/vendor/supabase.js" defer></script>
-  <script src="js/auth.js" defer></script>
+  <!-- LOGIN SYSTEM DISABLED. To bring it back, un-comment the next two lines. -->
+  <!-- <script src="js/vendor/supabase.js" defer></script> -->
+  <!-- <script src="js/auth.js" defer></script> -->
   <script src="js/consultation.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
@@ -37,14 +38,123 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
           <span class="breadcrumbs__sep">/</span>
-          <span>Free Consultation & Trial</span>
+          <span>Consultation</span>
         </nav>
         <div class="eyebrow" style="color: var(--color-accent);">Risk-Free Evaluation</div>
         <h1 class="page-hero__title">Book Your Discovery Consultation</h1>
-        <p class="text-lead" style="color: #D3DFEE; max-width: 760px;">
+        <p class="text-lead" style=" max-width: 760px;">
           Tell us about your accounting workflow, target software, and current transaction volume. We will formulate a
           tailored offshore proposal and schedule your 30-minute partner call.
         </p>
+      </div>
+    </section>
+
+    <!-- Services: one block per service. "Enquire" pre-selects it in the form below (still changeable). -->
+    <section class="section section--alt" id="our-services">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Our Services</div>
+          <h2>Choose a Service to Enquire About</h2>
+          <p>Pick the service you need and the form below fills it in for you. You can change it at any time before you submit.</p>
+        </div>
+        <div class="grid grid--3 service-blocks">
+          <article class="service-block" id="service-legal">
+            <h3 class="service-block__title">Legal &amp; Corporate Compliance</h3>
+            <p class="service-block__text">Statutory filings, secretarial records and corporate governance support to keep your business compliant.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Legal &amp; Corporate Compliance">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-tax">
+            <h3 class="service-block__title">Tax Consultancy &amp; Advisory</h3>
+            <p class="service-block__text">Tax planning, return preparation and advisory for businesses and individuals across jurisdictions.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Tax Consultancy &amp; Advisory">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-bookkeeping">
+            <h3 class="service-block__title">Bookkeeping &amp; Financial Preparation</h3>
+            <p class="service-block__text">Accurate day-to-day bookkeeping, reconciliations and financial statement preparation.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Bookkeeping &amp; Financial Preparation">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-vat-gst">
+            <h3 class="service-block__title">Sales Tax / VAT / GST Filing</h3>
+            <p class="service-block__text">Indirect tax registration, return filing and reconciliation handled on schedule.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Sales Tax / VAT / GST Filing">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-management">
+            <h3 class="service-block__title">Business Management Services</h3>
+            <p class="service-block__text">Operational and administrative support so you can focus on running the business.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Business Management Services">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-planning">
+            <h3 class="service-block__title">Business Planning Consultancy</h3>
+            <p class="service-block__text">Business plans, projections and strategy support for launches, growth and funding.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Business Planning Consultancy">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-research">
+            <h3 class="service-block__title">Business Research</h3>
+            <p class="service-block__text">Market, regulatory and competitor research to support confident decisions.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Business Research">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-incorporation">
+            <h3 class="service-block__title">Company &amp; LLP Incorporation</h3>
+            <p class="service-block__text">Entity selection, registration and post-incorporation compliance set-up.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Company &amp; LLP Incorporation">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-hr">
+            <h3 class="service-block__title">HR &amp; Labour Law Consultancy</h3>
+            <p class="service-block__text">HR policies, labour law compliance and employment documentation guidance.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="HR &amp; Labour Law Consultancy">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-ipr">
+            <h3 class="service-block__title">IPR / Trademark Services</h3>
+            <p class="service-block__text">Trademark search, registration and intellectual property protection support.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="IPR / Trademark Services">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-payroll">
+            <h3 class="service-block__title">Payroll Processing</h3>
+            <p class="service-block__text">Salary processing, statutory deductions and payslips, delivered on time.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="Payroll Processing">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+          <article class="service-block" id="service-apar">
+            <h3 class="service-block__title">AP / AR Management</h3>
+            <p class="service-block__text">Payables and receivables tracking, vendor payments and collections follow-up.</p>
+            <a href="#consultation-form" class="btn btn--readmore btn--sm" data-service="AP / AR Management">
+              <span>Enquire about this</span>
+              <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+            </a>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -107,22 +217,23 @@
 
             <!-- 1. Not logged in -->
             <div id="cm-gate" hidden>
-              <h3 style="margin-bottom: var(--space-2); color: var(--color-primary);">Log in to Continue</h3>
+              <h3 style="margin-bottom: var(--space-2); color: var(--color-primary);">Log in to Submit</h3>
               <p style="margin-bottom: var(--space-5);">
-                Please log in or create a free account to claim your free trial or book a consultation with our partners.
+                You can fill in the form below now, but you must be logged in to submit it. Log in or create a free account first; your answers are kept while you do.
               </p>
               <div class="auth-actions">
                 <a href="login.html?next=enquiry.html%23consultation-form" class="btn btn--primary" id="cm-login-link">Login</a>
                 <a href="login.html?tab=register&amp;next=enquiry.html%23consultation-form" class="btn btn--outline-navy" id="cm-register-link">Create an Account</a>
               </div>
+              <hr class="cm-divider">
             </div>
 
             <!-- 2. Logged in, free trial NOT yet used -->
             <div id="cm-free" hidden>
-              <span class="badge badge--gold">Free Trial &middot; one per account</span>
-              <h3 style="margin: var(--space-3) 0 var(--space-2); color: var(--color-primary);">Claim Your Free Trial</h3>
+              <span class="badge badge--gold">Consultation</span>
+              <h3 style="margin: var(--space-3) 0 var(--space-2); color: var(--color-primary);">Book Your Consultation</h3>
               <p style="font-size: 0.88rem; margin-bottom: var(--space-6); color: var(--color-text-muted);">
-                Each account can claim one free trial. All details are protected under legal client-advisory confidentiality.
+                All details are protected under legal client-advisory confidentiality.
               </p>
             <form id="free-trial-form" data-cm-form="FREE_TRIAL" novalidate>
               <div class="alert-box alert-box--error" role="alert" data-cm-error></div>
@@ -204,7 +315,7 @@
               </div>
 
               <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">
-                <span>Claim My Free Trial</span>
+                <span>Submit Request</span>
                 <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
               </button>
             </form>
@@ -325,14 +436,6 @@
       </div>
     </section>
   </main>
-
-  <!-- Developer credit ticker -->
-  <div class="dev-ticker" role="region" aria-label="Developed by Junaid Khan, Java Full Stack Developer and AI/ML Engineer">
-    <div class="dev-ticker__track">
-      <div class="dev-ticker__group"><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span></div>
-      <div class="dev-ticker__group" aria-hidden="true"><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span><span>DEVELOPED BY</span><span class="dev-ticker__star">✦</span><span class="dev-ticker__name">JUNAID KHAN</span><span class="dev-ticker__star">✦</span><span>JAVA FULL STACK DEVELOPER</span><span class="dev-ticker__star">✦</span><span>AI/ML ENGINEER</span><span class="dev-ticker__star">✦</span></div>
-    </div>
-  </div>
 
   <div id="site-footer"></div>
 </body>

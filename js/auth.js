@@ -41,8 +41,14 @@
     if (code === 'user_already_exists' || msg.includes('already registered')) {
       return 'An account with this email already exists. Please log in instead.';
     }
+    if (code === 'same_password' || msg.includes('different from the old password')) {
+      return 'Your new password must be different from your old one.';
+    }
     if (code === 'weak_password' || msg.includes('password should be')) {
-      return 'Please choose a stronger password (at least 8 characters).';
+      return 'Please choose a stronger password (at least 8 characters, with letters and numbers).';
+    }
+    if (code === 'session_not_found' || code === 'bad_jwt' || msg.includes('auth session missing')) {
+      return 'Your reset link has expired. Please request a new one.';
     }
     if (code === 'over_email_send_rate_limit' || code === 'over_request_rate_limit' || status === 429
       || msg.includes('rate limit') || msg.includes('too many')) {
@@ -106,8 +112,29 @@
     if (error) throw error;
   }
 
+  // Always answers the same way, so nobody can use this to find out who has an account.
+  async function sendPasswordReset(email) {
+    const { error } = await client.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/login.html'
+    });
+    if (error) throw error;
+  }
+
+  async function updatePassword(password) {
+    const { error } = await client.auth.updateUser({ password });
+    if (error) throw error;
+  }
+
+  // At least 8 characters with a letter and a number.
+  function passwordProblem(pw) {
+    if (!pw || pw.length < 8) return 'Use at least 8 characters.';
+    if (!/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) return 'Use both letters and numbers.';
+    return '';
+  }
+
   window.PremainsAuth = {
     configured, client, cfg, safeNext, friendlyError,
-    getSession, signUp, signIn, signOut, resendConfirmation
+    getSession, signUp, signIn, signOut, resendConfirmation,
+    sendPasswordReset, updatePassword, passwordProblem
   };
 })();

@@ -1,7 +1,7 @@
 # PREMAINS INTELLECT LLP - Corporate Website
 
 > **Legal, Corporate, Tax & Technical Advisory — Trusted by Businesses, Startups & Individuals**  
-> Headquarters: Raja Subodh Chandra Mallick Road, Laxmi Narayan Colony, Garia, Kolkata, West Bengal - 700047, India  
+> Headquarters: 38B, Baishnab Ghata Road, G F, Debanjali Apartment, Naktala, Netaji Nagar, Kolkata, West Bengal - 700047, India  
 > Phone/WhatsApp: +91 9818122696 | Emails: chandanmallb@gmail.com, engineerkundansharma@gmail.com  
 > Markets Served: India, USA, Canada, Australia, United Arab Emirates (UAE)
 
@@ -41,7 +41,7 @@ The website is engineered entirely with **semantic HTML5, modern CSS3, and modul
 ├── industries.html                            # 8 dedicated commercial industry breakdowns
 ├── faqs.html                                  # Comprehensive searchable FAQ accordion
 ├── contact.html                               # Contact details, embedded Google Map, message form
-├── enquiry.html                               # Free Trial / 30-min consultation discovery form
+├── enquiry.html                               # 30-min consultation discovery form
 ├── blog.html                                  # Blog listing with live search & category filters
 ├── privacy-policy.html                        # GDPR and client confidentiality statement
 ├── terms.html                                 # Professional terms of engagement
@@ -123,7 +123,6 @@ The website is engineered entirely with **semantic HTML5, modern CSS3, and modul
 │
 └── assets/
     ├── icons/icons.svg                        # SVG symbol sprite (UI icons + country flags)
-    ├── brochure.pdf                           # Downloadable corporate E-Brochure
     ├── images/                                # Local graphic assets
     └── flags/                                 # Country flag vectors
 ```
@@ -153,7 +152,7 @@ All contact details, social links, form endpoints, and analytics keys are config
 const SITE_CONFIG = {
   brand: {
     name: "PREMAINS INTELLECT LLP",
-    headquarters: "Raja Subodh Chandra Mallick Road, Laxmi Narayan Colony, Garia, Kolkata, West Bengal - 700047, India"
+    headquarters: "38B, Baishnab Ghata Road, G F, Debanjali Apartment, Naktala, Netaji Nagar, Kolkata, West Bengal - 700047, India"
   },
   contact: {
     phone: "+91 9818122696",

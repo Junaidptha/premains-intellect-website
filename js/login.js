@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const resendWrap = $('auth-resend');
   const loginForm = $('login-form');
   const registerForm = $('register-form');
+  const forgotForm = $('forgot-form');
+  const resetForm = $('reset-form');
+  const tabsBar = document.querySelector('.auth-tabs');
   const params = new URLSearchParams(window.location.search);
   const next = Auth ? Auth.safeNext(params.get('next')) : 'enquiry.html#consultation-form';
 
@@ -58,12 +61,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function selectTab(which) {
     const isLogin = which === 'login';
+    const isRegister = which === 'register';
     $('tab-login').classList.toggle('is-active', isLogin);
-    $('tab-register').classList.toggle('is-active', !isLogin);
+    $('tab-register').classList.toggle('is-active', isRegister);
     $('tab-login').setAttribute('aria-selected', String(isLogin));
-    $('tab-register').setAttribute('aria-selected', String(!isLogin));
+    $('tab-register').setAttribute('aria-selected', String(isRegister));
     loginForm.hidden = !isLogin;
-    registerForm.hidden = isLogin;
+    registerForm.hidden = !isRegister;
+    forgotForm.hidden = which !== 'forgot';
+    resetForm.hidden = which !== 'reset';
+    tabsBar.hidden = which === 'forgot' || which === 'reset';
     say();
   }
   $('tab-login').addEventListener('click', () => selectTab('login'));
@@ -72,8 +79,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     b.addEventListener('click', () => selectTab(b.dataset.switch)));
 
   // Clear a field's red state while typing
-  document.querySelectorAll('#login-form input, #register-form input').forEach((input) => {
+  document.querySelectorAll('.auth-panel input').forEach((input) => {
     input.addEventListener('input', () => input.classList.remove('is-invalid'));
+  });
+
+  // Show / hide password buttons
+  document.querySelectorAll('input[type="password"]').forEach((input) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'pw-wrap';
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'pw-toggle';
+    btn.textContent = 'Show';
+    btn.setAttribute('aria-label', 'Show password');
+    btn.addEventListener('click', () => {
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.textContent = show ? 'Hide' : 'Show';
+      btn.setAttribute('aria-label', (show ? 'Hide' : 'Show') + ' password');
+    });
+    wrap.appendChild(btn);
   });
 
   function showSignedIn(session) {
@@ -95,10 +122,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }
 
+  // ---- arrived from a "reset password" e-mail link? ----
+  let recovering = /type=recovery/.test(window.location.hash) || params.get('reset') === '1';
+  function startRecovery() {
+    recovering = true;
+    forms.hidden = false;
+    signedIn.hidden = true;
+    selectTab('reset');
+    say('ok', 'Choose a new password for your account.');
+    history.replaceState(null, '', window.location.pathname);
+  }
+  Auth.client.auth.onAuthStateChange((event) => {
+    if (event === 'PASSWORD_RECOVERY') startRecovery();
+  });
+
   // ---- already signed in? (also covers a fresh confirmation link) ----
   try {
     const session = await Auth.getSession();
-    if (session) {
+    if (recovering && session) {
+      startRecovery();
+    } else if (session) {
       if (params.get('confirmed') === '1' || /type=signup/.test(window.location.hash)) {
         showSignedIn(session);
         say('ok', 'Your email is confirmed. Taking you to the consultation form…');
@@ -153,7 +196,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       setInvalid(name, name.value.trim().length < 2),
       setInvalid(email, !EMAIL_RE.test(email.value.trim())),
       setInvalid(phone, !PHONE_RE.test(phone.value.trim())),
-      setInvalid(pw, pw.value.length < 8),
+      setInvalid(pw, Boolean(Auth.passwordProblem(pw.value))),
       setInvalid(pw2, pw2.value !== pw.value || !pw2.value)
     ];
     const consentOk = consent.checked;
@@ -183,6 +226,54 @@ document.addEventListener('DOMContentLoaded', async () => {
       say('err', Auth.friendlyError(err));
     }
     busy(registerForm, false);
+  });
+
+  // ------------------------------------------------------ FORGOT PASSWORD ---
+  forgotForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    say();
+    const email = $('forgot-email');
+    if (!setInvalid(email, !EMAIL_RE.test(email.value.trim()))) return;
+    busy(forgotForm, true, 'Sending…');
+    try {
+      await Auth.sendPasswordReset(email.value.trim());
+      // Same message whether or not the account exists (no account enumeration).
+      say('ok', 'If an account exists for ' + email.value.trim() +
+        ', a password reset link is on its way. Check your spam folder too.');
+    } catch (err) {
+      say('err', Auth.friendlyError(err));
+    }
+    busy(forgotForm, false);
+  });
+
+  // ------------------------------------------------------- SET NEW PASSWORD ---
+  resetForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    say();
+    const pw = $('reset-password');
+    const pw2 = $('reset-password2');
+    const ok = [
+      setInvalid(pw, Boolean(Auth.passwordProblem(pw.value))),
+      setInvalid(pw2, !pw2.value || pw2.value !== pw.value)
+    ].every(Boolean);
+    if (!ok) return;
+    busy(resetForm, true, 'Saving…');
+    try {
+      await Auth.updatePassword(pw.value);
+      resetForm.reset();
+      recovering = false;
+      const session = await Auth.getSession();
+      if (session) {
+        showSignedIn(session);
+        say('ok', 'Your password has been updated. You are signed in.');
+      } else {
+        selectTab('login');
+        say('ok', 'Your password has been updated. Please log in.');
+      }
+    } catch (err) {
+      say('err', Auth.friendlyError(err));
+    }
+    busy(resetForm, false);
   });
 
   // ------------------------------------------- resend confirmation / logout ---

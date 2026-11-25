@@ -1,7 +1,8 @@
 /**
  * PREMAINS INTELLECT LLP - Free Trial / Consultation (enquiry.html)
  *
- * Not logged in         -> login / register gate
+ * Not logged in         -> the Free Trial form is visible, with a login notice;
+ *                          submitting sends the visitor to log in (answers are kept)
  * Logged in, trial open -> Free Trial form        (one per account, for life)
  * Logged in, trial used -> normal Consultation form (as many as needed)
  *
@@ -18,16 +19,73 @@ document.addEventListener('DOMContentLoaded', async () => {
   const PANELS = ['cm-loading', 'cm-gate', 'cm-free', 'cm-normal', 'cm-success'];
   const PHONE_RE = /^[0-9+()\s\-]{7,20}$/;
 
-  function show(panelId) {
-    PANELS.forEach((id) => { $(id).hidden = id !== panelId; });
+  function show(panelId, alsoId) {
+    PANELS.forEach((id) => { $(id).hidden = id !== panelId && id !== alsoId; });
   }
 
-  if (!Auth || !Auth.configured) {
+  // Answers typed before logging in are kept for this browser tab only, then restored.
+  const DRAFT_KEY = 'premains_consultation_draft';
+  const SUFFIXES = ['name', 'phone', 'company', 'service', 'btype', 'req', 'extra', 'date'];
+  function saveDraft(form, prefix) {
+    try {
+      const draft = {};
+      SUFFIXES.forEach((sfx) => {
+        const el = form.querySelector('#' + prefix + '-' + sfx);
+        if (el && el.value) draft[sfx] = el.value;
+      });
+      window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    } catch (e) { /* storage blocked: the visitor just retypes */ }
+  }
+  function restoreDraft() {
+    try {
+      const draft = JSON.parse(window.sessionStorage.getItem(DRAFT_KEY) || 'null');
+      if (!draft) return;
+      ['ft', 'cn'].forEach((prefix) => SUFFIXES.forEach((sfx) => {
+        const el = $(prefix + '-' + sfx);
+        if (el && !el.value && draft[sfx]) el.value = draft[sfx];
+      }));
+      window.sessionStorage.removeItem(DRAFT_KEY);
+    } catch (e) { /* ignore */ }
+  }
+  function goToLogin() {
+    window.location.href = 'login.html?next=' + encodeURIComponent('enquiry.html#consultation-form');
+  }
+
+  // ---- service blocks: "Enquire about this" pre-selects the service (still changeable) ----
+  function chooseService(value) {
+    ['ft-service', 'cn-service'].forEach((id) => {
+      const sel = $(id);
+      if (!sel) return;
+      const has = Array.from(sel.options).some((o) => o.value === value);
+      if (has) {
+        sel.value = value;
+        sel.classList.remove('is-invalid');
+      }
+    });
+    document.querySelectorAll('.service-block').forEach((b) => {
+      const btn = b.querySelector('[data-service]');
+      b.classList.toggle('is-selected', Boolean(btn) && btn.dataset.service === value);
+    });
+  }
+  document.querySelectorAll('[data-service]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      chooseService(btn.dataset.service);
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  const wanted = new URLSearchParams(window.location.search).get('service');
+  if (wanted) chooseService(wanted);
+
+  // Login system switched off (its scripts are commented out in enquiry.html): "open mode".
+  const OPEN_MODE = !Auth;
+
+  if (Auth && !Auth.configured) {
     PANELS.forEach((id) => { $(id).hidden = true; });
     $('cm-config-error').style.display = 'block';
     return;
   }
-  const client = Auth.client;
+  const client = Auth ? Auth.client : null;
 
   // Local "today" as yyyy-mm-dd (for the date picker's minimum)
   const today = (() => {
@@ -37,6 +95,90 @@ document.addEventListener('DOMContentLoaded', async () => {
   })();
   const dateInput = $('cn-date');
   if (dateInput) dateInput.min = today;
+
+  // ============================================================================
+  // OPEN MODE (no login): the form e-mails the request to the office through
+  // Web3Forms (key in js/data/config.js). To bring the login system back,
+  // un-comment the three <script> tags in enquiry.html.
+  // ============================================================================
+  if (OPEN_MODE) {
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const form = $('free-trial-form');
+    const email = $('ft-email');
+    $('cm-userbar').hidden = true;
+    email.readOnly = false;
+    email.required = true;
+    email.placeholder = 'you@company.com';
+    const note = $('ft-email-note');
+    if (note) note.textContent = 'We will reply to this address.';
+    show('cm-free');
+
+    form.querySelectorAll('.form-control').forEach((el) => {
+      el.addEventListener('input', () => el.classList.remove('is-invalid'));
+      el.addEventListener('change', () => el.classList.remove('is-invalid'));
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (form.dataset.busy === '1') return;
+      showFormError(form, '');
+      const { valid, fields } = collect(form, 'ft');
+      const emailOk = check(email, !EMAIL_RE.test(email.value.trim()));
+      if (!valid || !emailOk) {
+        showFormError(form, 'Please review the highlighted fields and try again.');
+        return;
+      }
+
+      const cfg = (window.SITE_CONFIG && window.SITE_CONFIG.forms) || {};
+      const phone = (window.SITE_CONFIG && window.SITE_CONFIG.contact && window.SITE_CONFIG.contact.phoneDisplay) || '+91 98181 22696';
+      if (!cfg.accessKey || cfg.accessKey === 'demo-mode') {
+        console.warn('Set forms.accessKey (Web3Forms) in js/data/config.js; request was NOT sent.');
+        showFormError(form, 'Sorry, online submission is not available right now. Please call or WhatsApp us at ' + phone + '.');
+        return;
+      }
+
+      const ref = 'REQ-' + Date.now().toString(36).toUpperCase();
+      setBusy(form, true);
+      try {
+        const res = await fetch(cfg.actionUrl || 'https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: cfg.accessKey,
+            subject: 'New Consultation request: ' + fields.company.value.trim() + ' (' + ref + ')',
+            from_name: 'PREMAINS INTELLECT website',
+            replyto: email.value.trim(),
+            botcheck: '',
+            reference: ref,
+            request_type: 'CONSULTATION',
+            full_name: fields.name.value.trim(),
+            email: email.value.trim(),
+            phone: fields.phone.value.trim(),
+            company_name: fields.company.value.trim(),
+            service_required: fields.service.value,
+            business_type: fields.btype.value,
+            requirements: fields.req.value.trim(),
+            additional_information: fields.extra.value.trim()
+          })
+        });
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok || result.success === false) throw new Error(result.message || 'Submission failed');
+
+        form.reset();
+        showSuccess('CONSULTATION', ref);
+        $('cm-success-title').textContent = 'Your request is received';
+        $('cm-success-text').textContent = 'Thank you! Our senior partner will contact you within 2 to 4 business hours.';
+        $('cm-success-next').textContent = 'Submit Another Request';
+      } catch (err) {
+        console.error('Submit failed', err);
+        showFormError(form, 'Sorry, we could not submit your request. Please try again, or call or WhatsApp us at ' + phone + '.');
+      }
+      setBusy(form, false);
+    });
+
+    $('cm-success-next').addEventListener('click', () => { show('cm-free'); });
+    return;
+  }
 
   let session = null;
   let profile = null;
@@ -70,7 +212,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       session = await Auth.getSession();
       if (!session) {
         $('cm-userbar').hidden = true;
-        show('cm-gate');
+        ['ft', 'cn'].forEach((p) => { $(p + '-email').placeholder = 'Filled from your account after login'; });
+        show('cm-free'); // form only; login is required when the visitor submits
         return;
       }
       $('cm-user-email').textContent = session.user.email || '';
@@ -79,6 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       profile = await loadProfile(session.user.id);
       prefill('ft');
       prefill('cn');
+      restoreDraft();
       show(profile.free_trial_used ? 'cm-normal' : 'cm-free');
       if (window.location.hash === '#consultation-form') root.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (err) {
@@ -144,6 +288,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    // Must be logged in before anything is submitted.
+    let live = null;
+    try { live = await Auth.getSession(); } catch (e) { /* treated as logged out */ }
+    if (!live) {
+      saveDraft(form, prefix);
+      goToLogin();
+      return;
+    }
+
     const type = form.dataset.cmForm; // 'FREE_TRIAL' | 'CONSULTATION'
     setBusy(form, true);
     try {
@@ -182,7 +335,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
     if (text.includes('NOT_AUTHENTICATED') || (err && (err.status === 401 || /jwt/i.test(text)))) {
-      await refresh(); // session expired -> back to the login gate
+      saveDraft(form, form.dataset.cmForm === 'FREE_TRIAL' ? 'ft' : 'cn');
+      goToLogin(); // session expired -> log in again, answers kept
       return;
     }
     if (text.includes('INVALID_PHONE')) { check(fields.phone, true); showFormError(form, 'Please enter a valid phone number.'); return; }

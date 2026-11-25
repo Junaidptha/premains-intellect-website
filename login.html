@@ -7,7 +7,7 @@
   <meta name="root-path" content="./">
   <meta name="robots" content="noindex, nofollow">
   <title>Login / Register | PREMAINS INTELLECT LLP</title>
-  <meta name="description" content="Log in or create your PREMAINS INTELLECT LLP account to claim your free trial or book a consultation.">
+  <meta name="description" content="Log in or create your PREMAINS INTELLECT LLP account to book a consultation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -41,7 +41,7 @@
         <div class="eyebrow" style="color: var(--color-accent);">Client Account</div>
         <h1 class="page-hero__title">Login or Create Your Account</h1>
         <p class="text-lead page-hero__lead">
-          Register once to claim your free trial and to book consultations with our partners.
+          Register once to book consultations with our partners.
         </p>
       </div>
     </section>
@@ -55,7 +55,7 @@
             <h3 style="color: var(--color-primary); margin-bottom: var(--space-2);">You are signed in</h3>
             <p style="margin-bottom: var(--space-5);">Signed in as <strong id="auth-signed-in-email"></strong>.</p>
             <div class="auth-actions">
-              <a href="enquiry.html#consultation-form" class="btn btn--primary" id="auth-continue">Continue to Free Trial / Consultation</a>
+              <a href="enquiry.html#consultation-form" class="btn btn--primary" id="auth-continue">Continue to Consultation</a>
               <button type="button" class="btn btn--outline-navy" id="auth-logout">Log out</button>
             </div>
           </div>
@@ -85,6 +85,7 @@
                 <input type="password" id="login-password" class="form-control" autocomplete="current-password" required>
                 <div class="form-error">Please enter your password.</div>
               </div>
+              <p class="auth-forgot"><button type="button" class="auth-link" data-switch="forgot">Forgot password?</button></p>
               <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">
                 <span>Login</span>
                 <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
@@ -115,7 +116,7 @@
                 <div class="form-group">
                   <label for="reg-password" class="form-label">Password <span class="required">*</span></label>
                   <input type="password" id="reg-password" class="form-control" autocomplete="new-password" minlength="8" required>
-                  <div class="form-error">Use at least 8 characters.</div>
+                  <div class="form-error">Use at least 8 characters, with letters and numbers.</div>
                 </div>
                 <div class="form-group">
                   <label for="reg-password2" class="form-label">Confirm Password <span class="required">*</span></label>
@@ -135,6 +136,41 @@
                 <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
               </button>
               <p class="auth-switch">Already registered? <button type="button" class="auth-link" data-switch="login">Login</button></p>
+            </form>
+
+            <!-- FORGOT PASSWORD -->
+            <form id="forgot-form" class="auth-panel" novalidate hidden>
+              <h3 class="auth-panel__title">Reset your password</h3>
+              <p class="auth-panel__text">Enter the email you registered with and we will send you a link to choose a new password.</p>
+              <div class="form-group">
+                <label for="forgot-email" class="form-label">Email Address <span class="required">*</span></label>
+                <input type="email" id="forgot-email" class="form-control" autocomplete="email" required>
+                <div class="form-error">Please enter a valid email address.</div>
+              </div>
+              <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">
+                <span>Send Reset Link</span>
+                <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+              </button>
+              <p class="auth-switch"><button type="button" class="auth-link" data-switch="login">Back to login</button></p>
+            </form>
+
+            <!-- SET NEW PASSWORD (arrives from the e-mailed reset link) -->
+            <form id="reset-form" class="auth-panel" novalidate hidden>
+              <h3 class="auth-panel__title">Choose a new password</h3>
+              <div class="form-group">
+                <label for="reset-password" class="form-label">New Password <span class="required">*</span></label>
+                <input type="password" id="reset-password" class="form-control" autocomplete="new-password" minlength="8" required>
+                <div class="form-error">Use at least 8 characters, with letters and numbers.</div>
+              </div>
+              <div class="form-group">
+                <label for="reset-password2" class="form-label">Confirm New Password <span class="required">*</span></label>
+                <input type="password" id="reset-password2" class="form-control" autocomplete="new-password" required>
+                <div class="form-error">Passwords do not match.</div>
+              </div>
+              <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">
+                <span>Save New Password</span>
+                <svg class="icon"><use href="assets/icons/icons.svg#icon-arrow-right"></use></svg>
+              </button>
             </form>
           </div>
 
